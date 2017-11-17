@@ -12,10 +12,13 @@ namespace ExpandareaObiectelor.Models
     {
         public Figure()
         {
-            Points = new List<Point>();
             Path = new GraphicsPath();
+            ExpandedPath = new GraphicsPath();
+            Id = Guid.NewGuid();
         }
-        public List<Point> Points { get; set; }
+        public Guid Id { get; private set; }
         public GraphicsPath Path{ get; set; }
+        public GraphicsPath ExpandedPath{ get; set; }
+        
     }
 }
