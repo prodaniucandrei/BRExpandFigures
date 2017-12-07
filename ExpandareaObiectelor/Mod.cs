@@ -13,6 +13,7 @@ namespace ExpandareaObiectelor
         Square,
         Triangle,
         Circle,
-        Drag
+        Drag,
+        Rotate
     }
 }

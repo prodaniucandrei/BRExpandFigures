@@ -30,6 +30,11 @@ namespace ExpandareaObiectelor
                     break;
                 case "triangle":
                     break;
+                case "rotate":
+                    heigthTextBox.Visible = false;
+                    heightLbl.Visible = false;
+                    label1.Text = "Unghi";
+                    break;
             }
         }
 
@@ -53,6 +58,13 @@ namespace ExpandareaObiectelor
                         }
                         break;
                     case "triangle":
+                        break;
+                    case "rotate":
+                        if (!string.IsNullOrEmpty(razTextBox.Text))
+                        {
+                            this.Height = int.Parse(razTextBox.Text);
+                            this.Width = int.Parse(razTextBox.Text);
+                        }
                         break;
                 }
             }

@@ -10,6 +10,7 @@ namespace ExpandareaObiectelor
 {
     public partial class Form1 : Form
     {
+        #region variables
         Mod mod;
         Color color;
         Figure figure;
@@ -27,6 +28,7 @@ namespace ExpandareaObiectelor
         SolidBrush brush = new SolidBrush(Color.Blue);
         GraphicsPath pathDrag;
         Figure deleteFigure;
+        #endregion
 
         public Form1()
         {
@@ -46,6 +48,7 @@ namespace ExpandareaObiectelor
             butttons.Add(triangleBtn);
             butttons.Add(circleBtn);
             butttons.Add(dragBtn);
+            butttons.Add(RotateBtn);
             color = dragBtn.BackColor;
         }
 
@@ -94,8 +97,6 @@ namespace ExpandareaObiectelor
             }
             else if (mod == Mod.Square)
             {
-
-
                 figure = new Figure();
                 var rect = new Rectangle(e.X, e.Y, dialog.Width, dialog.Height);
                 gp.DrawRectangle(pen, rect);
@@ -124,6 +125,17 @@ namespace ExpandareaObiectelor
                 figure.Path.AddEllipse(circle);
                 figures.Add(figure);
                 gp.FillPath(brush, figure.Path);
+            }
+            else if (mod == Mod.Rotate)
+            {
+                Matrix trans = new Matrix();
+                trans.RotateAt(dialog.Width, figures.FirstOrDefault(c=>c.Id==dragFigure).Path.PathPoints.FirstOrDefault());
+                figures.FirstOrDefault(c => c.Id == dragFigure).Path.Transform(trans);
+                gp.Clear(Color.White);
+                foreach (var figure in figures)
+                {
+                    gp.FillPath(brush, figure.Path);
+                }
             }
 
         }
@@ -168,7 +180,7 @@ namespace ExpandareaObiectelor
             }
         }
 
-
+        #region btns
         private void expandToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pen.Color = Color.Yellow;
@@ -231,6 +243,16 @@ namespace ExpandareaObiectelor
             ResetBtns(dragBtn);
             mod = Mod.Drag;
         }
+        private void RotateBtn_Click(object sender, EventArgs e)
+        {
+            RotateBtn.BackColor = Color.Aqua;
+            ResetBtns(RotateBtn);
+            mod = Mod.Rotate;
+            if (dialog != null)
+                dialog.Dispose();
+            dialog = new SizeDialog("rotate");
+            dialog.Show();
+        }
 
         private void ResetBtns(ToolStripButton btn)
         {
@@ -253,6 +275,7 @@ namespace ExpandareaObiectelor
             }
             pen = new Pen(Color.Black);
         }
+        #endregion
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -483,10 +506,38 @@ namespace ExpandareaObiectelor
             }
         }
 
+
+
         #endregion
 
         #endregion
 
+        private void expand1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var figure in figures)
+            {
 
+            }
+        }
+
+        private void toolStripButton1_Click_1(object sender, EventArgs e)
+        {
+            Bitmap bmp = new Bitmap(this.panel.Width, panel.Height);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.White);
+                pen.Color = Color.Yellow;
+                pen.Width = 20;
+                foreach (var figure in figures)
+                {
+                    g.DrawPath(pen, figure.Path);
+
+                    g.FillPath(brush, figure.Path);
+                }
+            }
+            bmp.Save(@"C:\panel.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            MessageBox.Show("Saved");
+            pen = new Pen(Color.Black);
+        }
     }
 }

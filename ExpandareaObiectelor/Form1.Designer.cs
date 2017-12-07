@@ -41,6 +41,9 @@
             this.circleBtn = new System.Windows.Forms.ToolStripButton();
             this.dragBtn = new System.Windows.Forms.ToolStripButton();
             this.expandBtn = new System.Windows.Forms.ToolStripButton();
+            this.RotateBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menu.SuspendLayout();
             this.panel.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -68,14 +71,14 @@
             // expandToolStripMenuItem
             // 
             this.expandToolStripMenuItem.Name = "expandToolStripMenuItem";
-            this.expandToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.expandToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.expandToolStripMenuItem.Text = "Expand";
             this.expandToolStripMenuItem.Click += new System.EventHandler(this.expandToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -99,7 +102,9 @@
             this.triangleBtn,
             this.circleBtn,
             this.dragBtn,
-            this.expandBtn});
+            this.expandBtn,
+            this.RotateBtn,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(991, 25);
@@ -161,6 +166,24 @@
             this.expandBtn.Text = "Concav";
             this.expandBtn.Click += new System.EventHandler(this.expandBtn_Click);
             // 
+            // RotateBtn
+            // 
+            this.RotateBtn.Image = ((System.Drawing.Image)(resources.GetObject("RotateBtn.Image")));
+            this.RotateBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RotateBtn.Name = "RotateBtn";
+            this.RotateBtn.Size = new System.Drawing.Size(61, 22);
+            this.RotateBtn.Text = "Rotate";
+            this.RotateBtn.Click += new System.EventHandler(this.RotateBtn_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton1.Text = "Export";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +222,9 @@
         private System.Windows.Forms.ToolStripButton circleBtn;
         private System.Windows.Forms.ToolStripButton expandBtn;
         private System.Windows.Forms.ToolStripButton dragBtn;
+        private System.Windows.Forms.ToolStripButton RotateBtn;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
